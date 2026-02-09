@@ -8,9 +8,21 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+var useInMemoryDatabase = builder.Configuration.GetValue<bool>("UseInMemoryDatabase");
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
 builder.Services.AddDbContext<AppDbContext>(opt =>
 {
-    opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    if (useInMemoryDatabase)
+    {
+        opt.UseInMemoryDatabase("TrainingTracker");
+        return;
+    }
+
+    if (string.IsNullOrWhiteSpace(connectionString))
+        throw new InvalidOperationException("DefaultConnection is missing. Set it in appsettings.json or enable UseInMemoryDatabase.");
+
+    opt.UseSqlServer(connectionString);
 });
 
 // DI: AddScoped (krav)
@@ -29,4 +41,3 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.MapControllers();
 app.Run();
-

@@ -20,4 +20,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="10.1.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="TrainingTrackerApi/**/*.cs" />
+    <Content Remove="TrainingTrackerApi/**" />
+    <None Remove="TrainingTrackerApi/**" />
+  </ItemGroup>
+
 </Project>

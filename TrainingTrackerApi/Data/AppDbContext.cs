@@ -25,3 +25,4 @@ public class AppDbContext : DbContext
             .HasForeignKey(e => e.TrainingWeekId)
             .OnDelete(DeleteBehavior.Cascade);
     }
+}

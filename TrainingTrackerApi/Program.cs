@@ -13,14 +13,8 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 builder.Services.AddDbContext<AppDbContext>(opt =>
 {
-    if (useInMemoryDatabase)
-    {
-        opt.UseInMemoryDatabase("TrainingTracker");
-        return;
-    }
-
     if (string.IsNullOrWhiteSpace(connectionString))
-        throw new InvalidOperationException("DefaultConnection is missing. Set it in appsettings.json or enable UseInMemoryDatabase.");
+        throw new InvalidOperationException("DefaultConnection is missing. Set it in appsettings.json or enable UseInMemoryDatabase properly.");
 
     opt.UseSqlServer(connectionString);
 });

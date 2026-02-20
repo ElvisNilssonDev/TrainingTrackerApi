@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using TrainingTrackerApi.Dtos;
 using TrainingTrackerApi.Models;
 using TrainingTrackerApi.Services;
@@ -10,84 +11,51 @@ namespace TrainingTrackerApi.Controllers;
 public class TrainingWeeksController : ControllerBase
 {
     private readonly ITrainingWeekService _service;
+    private readonly IMapper _mapper;
 
-    public TrainingWeeksController(ITrainingWeekService service)
+    public TrainingWeeksController(ITrainingWeekService service, IMapper mapper)
     {
         _service = service;
+        _mapper = mapper;
     }
 
-    // GET /api/trainingweeks?search=...
     [HttpGet]
     public async Task<ActionResult<List<TrainingWeekResponseDto>>> GetAll([FromQuery] string? search)
     {
         var weeks = await _service.GetAllAsync(search);
-        var dto = weeks.Select(w => new TrainingWeekResponseDto
-        {
-            Id = w.Id,
-            Title = w.Title,
-            Description = w.Description,
-            WeekStart = w.WeekStart
-        }).ToList();
-
+        var dto = _mapper.Map<List<TrainingWeekResponseDto>>(weeks);
         return Ok(dto);
     }
 
-    // GET /api/trainingweeks/{id}
     [HttpGet("{id:int}")]
     public async Task<ActionResult<TrainingWeekResponseDto>> GetById(int id)
     {
         var week = await _service.GetByIdAsync(id);
         if (week is null) return NotFound();
 
-        return Ok(new TrainingWeekResponseDto
-        {
-            Id = week.Id,
-            Title = week.Title,
-            Description = week.Description,
-            WeekStart = week.WeekStart
-        });
+        return Ok(_mapper.Map<TrainingWeekResponseDto>(week));
     }
 
-    // POST /api/trainingweeks
     [HttpPost]
     public async Task<ActionResult<TrainingWeekResponseDto>> Create([FromBody] TrainingWeekCreateDto dto)
     {
-        var model = new TrainingWeek
-        {
-            Title = dto.Title,
-            Description = dto.Description,
-            WeekStart = dto.WeekStart
-        };
-
+        var model = _mapper.Map<TrainingWeek>(dto);
         var created = await _service.CreateAsync(model);
 
-        return CreatedAtAction(nameof(GetById), new { id = created.Id }, new TrainingWeekResponseDto
-        {
-            Id = created.Id,
-            Title = created.Title,
-            Description = created.Description,
-            WeekStart = created.WeekStart
-        });
+        var response = _mapper.Map<TrainingWeekResponseDto>(created);
+        return CreatedAtAction(nameof(GetById), new { id = response.Id }, response);
     }
 
-    // PUT /api/trainingweeks/{id}
     [HttpPut("{id:int}")]
     public async Task<IActionResult> Update(int id, [FromBody] TrainingWeekUpdateDto dto)
     {
-        var updated = new TrainingWeek
-        {
-            Title = dto.Title,
-            Description = dto.Description,
-            WeekStart = dto.WeekStart
-        };
-
+        var updated = _mapper.Map<TrainingWeek>(dto);
         var ok = await _service.UpdateAsync(id, updated);
         if (!ok) return NotFound();
 
         return NoContent();
     }
 
-    // DELETE /api/trainingweeks/{id}
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> Delete(int id)
     {

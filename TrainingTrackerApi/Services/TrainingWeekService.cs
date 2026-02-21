@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using TrainingTrackerApi.Data;
 using TrainingTrackerApi.Models;
 
@@ -15,7 +15,9 @@ public class TrainingWeekService : ITrainingWeekService
 
     public async Task<List<TrainingWeek>> GetAllAsync(string? search)
     {
-        var q = _db.TrainingWeeks.AsQueryable();
+        var q = _db.TrainingWeeks
+            .Include(w => w.TrainingDays)
+            .AsQueryable();
 
         if (!string.IsNullOrWhiteSpace(search))
             q = q.Where(w => w.Title.Contains(search));
@@ -28,16 +30,12 @@ public class TrainingWeekService : ITrainingWeekService
     public async Task<TrainingWeek?> GetByIdAsync(int id)
     {
         return await _db.TrainingWeeks
-            .Include(w => w.LiftEntries)
-            .Include(w => w.NutritionEntries)
+            .Include(w => w.TrainingDays)
             .FirstOrDefaultAsync(w => w.Id == id);
     }
 
     public async Task<TrainingWeek> CreateAsync(TrainingWeek week)
     {
-        if (week.WeekStart.Date < DateTime.Today)
-            throw new ArgumentException("WeekStart får inte vara i dåtid.");
-
         _db.TrainingWeeks.Add(week);
         await _db.SaveChangesAsync();
         return week;
@@ -45,9 +43,6 @@ public class TrainingWeekService : ITrainingWeekService
 
     public async Task<bool> UpdateAsync(int id, TrainingWeek updated)
     {
-        if (updated.WeekStart.Date < DateTime.Today)
-            throw new ArgumentException("WeekStart får inte vara i dåtid.");
-
         var existing = await _db.TrainingWeeks.FirstOrDefaultAsync(w => w.Id == id);
         if (existing is null) return false;
 
@@ -69,4 +64,3 @@ public class TrainingWeekService : ITrainingWeekService
         return true;
     }
 }
-

@@ -23,6 +23,7 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 
 // DI: AddScoped (krav)
 builder.Services.AddScoped<ITrainingWeekService, TrainingWeekService>();
+builder.Services.AddScoped<ITrainingDayService, TrainingDayService>();
 builder.Services.AddScoped<ILiftEntryService, LiftEntryService>();
 builder.Services.AddScoped<INutritionEntryService, NutritionEntryService>();
 

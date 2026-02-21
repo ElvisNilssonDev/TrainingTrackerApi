@@ -13,13 +13,13 @@ public class NutritionEntryService : INutritionEntryService
         _db = db;
     }
 
-    public async Task<List<NutritionEntry>> GetAllAsync(int? trainingWeekId, string? title)
+    public async Task<List<NutritionEntry>> GetAllAsync(int? trainingDayId, string? title)
     {
         var query = _db.NutritionEntries.AsQueryable();
 
-        if (trainingWeekId.HasValue)
+        if (trainingDayId.HasValue)
         {
-            query = query.Where(n => n.TrainingWeekId == trainingWeekId.Value);
+            query = query.Where(n => n.TrainingDayId == trainingDayId.Value);
         }
 
         if (!string.IsNullOrWhiteSpace(title))
@@ -39,7 +39,7 @@ public class NutritionEntryService : INutritionEntryService
 
     public async Task<NutritionEntry?> CreateAsync(NutritionEntry entry)
     {
-        var weekExists = await _db.TrainingWeeks.AnyAsync(w => w.Id == entry.TrainingWeekId);
+        var weekExists = await _db.TrainingDays.AnyAsync(w => w.Id == entry.TrainingDayId);
         if (!weekExists)
         {
             return null;
@@ -58,10 +58,10 @@ public class NutritionEntryService : INutritionEntryService
             return NutritionEntryUpdateResult.NotFound;
         }
 
-        var weekExists = await _db.TrainingWeeks.AnyAsync(w => w.Id == updated.TrainingWeekId);
+        var weekExists = await _db.TrainingDays.AnyAsync(w => w.Id == updated.TrainingDayId);
         if (!weekExists)
         {
-            return NutritionEntryUpdateResult.InvalidTrainingWeek;
+            return NutritionEntryUpdateResult.InvalidTrainingDay;
         }
 
         existing.Title = updated.Title;
@@ -70,7 +70,7 @@ public class NutritionEntryService : INutritionEntryService
         existing.ProteinGrams = updated.ProteinGrams;
         existing.CarbsGrams = updated.CarbsGrams;
         existing.FatGrams = updated.FatGrams;
-        existing.TrainingWeekId = updated.TrainingWeekId;
+        existing.TrainingDayId = updated.TrainingDayId;
 
         await _db.SaveChangesAsync();
         return NutritionEntryUpdateResult.Updated;

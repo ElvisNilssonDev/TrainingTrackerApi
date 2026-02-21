@@ -1,4 +1,4 @@
-﻿using TrainingTrackerApi.Models;
+using TrainingTrackerApi.Models;
 
 namespace TrainingTrackerApi.Services;
 

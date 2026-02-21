@@ -1,10 +1,10 @@
 namespace TrainingTrackerApi.Dtos;
 
-public class TrainingWeekResponseDto
+public class TrainingDayResponseDto
 {
     public int Id { get; set; }
     public string Title { get; set; } = null!;
     public string Description { get; set; } = "";
-    public DateTime WeekStart { get; set; }
-    public List<TrainingDayResponseDto> TrainingDays { get; set; } = new();
+    public DateTime Date { get; set; }
+    public int TrainingWeekId { get; set; }
 }

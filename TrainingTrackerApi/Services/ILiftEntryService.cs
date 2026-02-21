@@ -4,7 +4,7 @@ namespace TrainingTrackerApi.Services;
 
 public interface ILiftEntryService
 {
-    Task<List<LiftEntry>> GetAllAsync(int? trainingWeekId, string? exercise);
+    Task<List<LiftEntry>> GetAllAsync(int? trainingDayId, string? exercise);
     Task<LiftEntry?> GetByIdAsync(int id);
     Task<LiftEntry?> CreateAsync(LiftEntry entry);
     Task<LiftEntryUpdateResult> UpdateAsync(int id, LiftEntry updated);
@@ -15,5 +15,5 @@ public enum LiftEntryUpdateResult
 {
     Updated,
     NotFound,
-    InvalidTrainingWeek
+    InvalidTrainingDay
 }

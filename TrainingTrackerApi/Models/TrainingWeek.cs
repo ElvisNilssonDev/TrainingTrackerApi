@@ -1,4 +1,4 @@
-﻿namespace TrainingTrackerApi.Models;
+namespace TrainingTrackerApi.Models;
 
 public class TrainingWeek
 {
@@ -10,6 +10,5 @@ public class TrainingWeek
 
     public DateTime WeekStart { get; set; }
 
-    public ICollection<LiftEntry> LiftEntries { get; set; } = new List<LiftEntry>();
-    public ICollection<NutritionEntry> NutritionEntries { get; set; } = new List<NutritionEntry>();
+    public ICollection<TrainingDay> TrainingDays { get; set; } = new List<TrainingDay>();
 }

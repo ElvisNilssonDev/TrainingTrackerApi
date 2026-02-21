@@ -10,7 +10,7 @@ namespace TrainingTrackerApi.Dtos
         [Required]
         public DateTime Time { get; set; }
 
-        [Range(0, 2000)]
+        [Range(0, 20000)]
         public int Calories { get; set; }
 
         [Range(0, 500)]

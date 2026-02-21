@@ -10,7 +10,7 @@ public class NutritionEntryCreateDto
     [Required]
     public DateTime Time { get; set; }
 
-    [Range(0, 20000)]
+    [Range(0, 200000)]
     public int Calories { get; set; }
 
     [Range(0, 500)]

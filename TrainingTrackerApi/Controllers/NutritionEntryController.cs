@@ -20,9 +20,9 @@ public class NutritionEntryController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<NutritionEntryDto>>> GetAll([FromQuery] int? trainingWeekId, [FromQuery] string? title)
+    public async Task<ActionResult<List<NutritionEntryDto>>> GetAll([FromQuery] int? trainingDayId, [FromQuery] string? title)
     {
-        var entries = await _service.GetAllAsync(trainingWeekId, title);
+        var entries = await _service.GetAllAsync(trainingDayId, title);
         return Ok(_mapper.Map<List<NutritionEntryDto>>(entries));
     }
 
@@ -46,7 +46,7 @@ public class NutritionEntryController : ControllerBase
 
         if (created is null)
         {
-            return BadRequest("TrainingWeekId does not exist.");
+            return BadRequest("TrainingDayId does not exist.");
         }
 
         var response = _mapper.Map<NutritionEntryDto>(created);
@@ -63,7 +63,7 @@ public class NutritionEntryController : ControllerBase
         {
             NutritionEntryUpdateResult.Updated => NoContent(),
             NutritionEntryUpdateResult.NotFound => NotFound(),
-            NutritionEntryUpdateResult.InvalidTrainingWeek => BadRequest("TrainingWeekId does not exist."),
+            NutritionEntryUpdateResult.InvalidTrainingDay => BadRequest("TrainingDayId does not exist."),
             _ => StatusCode(StatusCodes.Status500InternalServerError)
         };
     }

@@ -20,9 +20,9 @@ public class LiftEntryController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<LiftEntryResponseDto>>> GetAll([FromQuery] int? trainingWeekId, [FromQuery] string? exercise)
+    public async Task<ActionResult<List<LiftEntryResponseDto>>> GetAll([FromQuery] int? trainingDayId, [FromQuery] string? exercise)
     {
-        var entries = await _service.GetAllAsync(trainingWeekId, exercise);
+        var entries = await _service.GetAllAsync(trainingDayId, exercise);
         return Ok(_mapper.Map<List<LiftEntryResponseDto>>(entries));
     }
 
@@ -46,7 +46,7 @@ public class LiftEntryController : ControllerBase
 
         if (created is null)
         {
-            return BadRequest("TrainingWeekId does not exist.");
+            return BadRequest("TrainingDayId does not exist.");
         }
 
         var response = _mapper.Map<LiftEntryResponseDto>(created);
@@ -63,7 +63,7 @@ public class LiftEntryController : ControllerBase
         {
             LiftEntryUpdateResult.Updated => NoContent(),
             LiftEntryUpdateResult.NotFound => NotFound(),
-            LiftEntryUpdateResult.InvalidTrainingWeek => BadRequest("TrainingWeekId does not exist."),
+            LiftEntryUpdateResult.InvalidTrainingDay => BadRequest("TrainingDayId does not exist."),
             _ => StatusCode(StatusCodes.Status500InternalServerError)
         };
     }

@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using TrainingTrackerApi.Dtos;
 using TrainingTrackerApi.Models;
@@ -23,8 +23,7 @@ public class TrainingWeeksController : ControllerBase
     public async Task<ActionResult<List<TrainingWeekResponseDto>>> GetAll([FromQuery] string? search)
     {
         var weeks = await _service.GetAllAsync(search);
-        var dto = _mapper.Map<List<TrainingWeekResponseDto>>(weeks);
-        return Ok(dto);
+        return Ok(_mapper.Map<List<TrainingWeekResponseDto>>(weeks));
     }
 
     [HttpGet("{id:int}")]
@@ -65,4 +64,3 @@ public class TrainingWeeksController : ControllerBase
         return NoContent();
     }
 }
-

@@ -1,4 +1,4 @@
-﻿namespace TrainingTrackerApi.Models
+namespace TrainingTrackerApi.Models
 {
     public class NutritionEntry
     {
@@ -11,7 +11,7 @@
         public int? CarbsGrams { get; set; }
         public int? FatGrams { get; set; }
 
-        public int TrainingWeekId { get; set; }
-        public TrainingWeek TrainingWeek { get; set; } = null!;
+        public int TrainingDayId { get; set; }
+        public TrainingDay TrainingDay { get; set; } = null!;
     }
 }

@@ -23,6 +23,6 @@ public class LiftEntryCreateDto
     public int Sets { get; set; }
 
     [Required]
-    public int TrainingWeekId { get; set; }
+    public int TrainingDayId { get; set; }
 }
 

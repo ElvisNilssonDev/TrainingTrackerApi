@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using TrainingTrackerApi.Dtos;
 using TrainingTrackerApi.Models;
 
@@ -8,10 +8,13 @@ namespace TrainingTrackerApi.Mapping
     {
         public MappingProfile()
         {
-
             CreateMap<TrainingWeek, TrainingWeekResponseDto>();
             CreateMap<TrainingWeekCreateDto, TrainingWeek>();
             CreateMap<TrainingWeekUpdateDto, TrainingWeek>();
+
+            CreateMap<TrainingDay, TrainingDayResponseDto>();
+            CreateMap<TrainingDayCreateDto, TrainingDay>();
+            CreateMap<TrainingDayUpdateDto, TrainingDay>();
 
             CreateMap<LiftEntry, LiftEntryResponseDto>();
             CreateMap<LiftEntryCreateDto, LiftEntry>();

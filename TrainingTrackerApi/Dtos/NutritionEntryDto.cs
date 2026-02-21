@@ -9,6 +9,6 @@
         public int? ProteinGrams { get; set; }
         public int? CarbsGrams { get; set; }        
         public int? FatGrams { get; set; }
-        public int TrainingWeekId { get; set; }
+        public int TrainingDayId { get; set; }
     }
 }

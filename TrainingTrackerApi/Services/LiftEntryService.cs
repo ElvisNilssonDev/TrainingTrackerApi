@@ -13,13 +13,13 @@ public class LiftEntryService : ILiftEntryService
         _db = db;
     }
 
-    public async Task<List<LiftEntry>> GetAllAsync(int? trainingWeekId, string? exercise)
+    public async Task<List<LiftEntry>> GetAllAsync(int? trainingDayId, string? exercise)
     {
         var query = _db.LiftEntries.AsQueryable();
 
-        if (trainingWeekId.HasValue)
+        if (trainingDayId.HasValue)
         {
-            query = query.Where(l => l.TrainingWeekId == trainingWeekId.Value);
+            query = query.Where(l => l.TrainingDayId == trainingDayId.Value);
         }
 
         if (!string.IsNullOrWhiteSpace(exercise))
@@ -39,7 +39,7 @@ public class LiftEntryService : ILiftEntryService
 
     public async Task<LiftEntry?> CreateAsync(LiftEntry entry)
     {
-        var weekExists = await _db.TrainingWeeks.AnyAsync(w => w.Id == entry.TrainingWeekId);
+        var weekExists = await _db.TrainingDays.AnyAsync(w => w.Id == entry.TrainingDayId);
         if (!weekExists)
         {
             return null;
@@ -58,10 +58,10 @@ public class LiftEntryService : ILiftEntryService
             return LiftEntryUpdateResult.NotFound;
         }
 
-        var weekExists = await _db.TrainingWeeks.AnyAsync(w => w.Id == updated.TrainingWeekId);
+        var weekExists = await _db.TrainingDays.AnyAsync(w => w.Id == updated.TrainingDayId);
         if (!weekExists)
         {
-            return LiftEntryUpdateResult.InvalidTrainingWeek;
+            return LiftEntryUpdateResult.InvalidTrainingDay;
         }
 
         existing.Title = updated.Title;
@@ -70,7 +70,7 @@ public class LiftEntryService : ILiftEntryService
         existing.WeightKg = updated.WeightKg;
         existing.Reps = updated.Reps;
         existing.Sets = updated.Sets;
-        existing.TrainingWeekId = updated.TrainingWeekId;
+        existing.TrainingDayId = updated.TrainingDayId;
 
         await _db.SaveChangesAsync();
         return LiftEntryUpdateResult.Updated;

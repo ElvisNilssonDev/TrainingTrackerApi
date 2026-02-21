@@ -4,7 +4,7 @@ namespace TrainingTrackerApi.Services;
 
 public interface INutritionEntryService
 {
-    Task<List<NutritionEntry>> GetAllAsync(int? trainingWeekId, string? title);
+    Task<List<NutritionEntry>> GetAllAsync(int? trainingDayId, string? title);
     Task<NutritionEntry?> GetByIdAsync(int id);
     Task<NutritionEntry?> CreateAsync(NutritionEntry entry);
     Task<NutritionEntryUpdateResult> UpdateAsync(int id, NutritionEntry updated);
@@ -15,7 +15,7 @@ public enum NutritionEntryUpdateResult
 {
     Updated,
     NotFound,
-    InvalidTrainingWeek
+    InvalidTrainingDay
 }
 
 

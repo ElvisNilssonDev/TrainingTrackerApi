@@ -21,7 +21,7 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
     opt.UseSqlServer(connectionString);
 });
 
-// DI: AddScoped (krav)
+
 builder.Services.AddScoped<ITrainingWeekService, TrainingWeekService>();
 builder.Services.AddScoped<ITrainingDayService, TrainingDayService>();
 builder.Services.AddScoped<ILiftEntryService, LiftEntryService>();

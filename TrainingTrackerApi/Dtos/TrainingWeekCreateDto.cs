@@ -10,7 +10,7 @@ public class TrainingWeekCreateDto
 
     public string Description { get; set; } = "";
 
-    // Måndag som start rekommenderas, men vi nöjer oss med “inte i dåtid”
+    
     [Required]
     public DateTime WeekStart { get; set; }
 }

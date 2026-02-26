@@ -7,5 +7,5 @@ A training app for my own goal of becoming a bodybuilder for asthetic purposes. 
 * Daily/weekly uppdates will happen.<br/>
 
 <br/> Concept art may deviate from real project:
-![Concept:](https://github.com/ElvisNilssonDev/TrainingTrackerApi/blob/975a0a48d7fe2157a30037b79155b9affb15a953/Images/Fitness%20tracking%20app%20interface%20overview.png)<br/>
+![Concept:](https://github.com/ElvisNilssonDev/TrainingTrackerApi/blob/0c01ace42df041f2906d453f7df250d2b3630f0c/Images/image_2026-02-26_154051831.png)<br/>
 

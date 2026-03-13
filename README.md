@@ -4,7 +4,7 @@ A training app for my own goal of becoming a bodybuilder for asthetic purposes. 
 * The app will give you the resources to logg your weeks, days and specific lifts.
 # Development Underway
 * This app is currently in developement and may contain bugs.
-* Daily/weekly uppdates will happen.<br/>
+* Daily/weekly uppdates will happen and if not I will probably be occupied with other projects.<br/>
 
 <br/> Concept art may deviate from real project:
 ![Concept:](https://github.com/ElvisNilssonDev/TrainingTrackerApi/blob/0c01ace42df041f2906d453f7df250d2b3630f0c/Images/image_2026-02-26_154051831.png)<br/>

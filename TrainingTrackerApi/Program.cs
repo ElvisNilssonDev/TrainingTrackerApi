@@ -21,6 +21,22 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
     opt.UseSqlServer(connectionString);
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend",
+        policy =>
+        {
+            policy
+                .WithOrigins(
+                    "https://localhost:7239",
+                    "http://localhost:5122"
+                )
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
+
+
 
 builder.Services.AddScoped<ITrainingWeekService, TrainingWeekService>();
 builder.Services.AddScoped<ITrainingDayService, TrainingDayService>();
@@ -29,6 +45,7 @@ builder.Services.AddScoped<INutritionEntryService, NutritionEntryService>();
 
 var app = builder.Build();
 
+app.UseCors("AllowFrontend");
 app.UseSwagger();
 app.UseSwaggerUI(options =>
 {

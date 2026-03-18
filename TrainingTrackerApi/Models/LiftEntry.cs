@@ -7,7 +7,7 @@ namespace TrainingTrackerApi.Models
         public DateTime Time { get; set; }
 
         public string Exercise { get; set; } = null!;
-        public decimal WeightKg { get; set; }
+        public double WeightKg { get; set; }
         public int Reps { get; set; }
         public int Sets { get; set; }
 

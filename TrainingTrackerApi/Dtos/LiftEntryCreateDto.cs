@@ -14,7 +14,7 @@ public class LiftEntryCreateDto
     public string Exercise { get; set; } = null!;
 
     [Range(0, 2000)]
-    public decimal WeightKg { get; set; }
+    public double WeightKg { get; set; }
 
     [Range(1, 200)]
     public int Reps { get; set; }

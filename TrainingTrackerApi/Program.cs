@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using TrainingTrackerApi.Data;
 using TrainingTrackerApi.Services;
@@ -8,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddAutoMapper(typeof(MappingProfile));
+builder.Services.AddAutoMapper(cfg => { }, typeof(MappingProfile));
 
 var useInMemoryDatabase = builder.Configuration.GetValue<bool>("UseInMemoryDatabase");
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -29,14 +30,13 @@ builder.Services.AddCors(options =>
             policy
                 .WithOrigins(
                     "https://localhost:7239",
-                    "http://localhost:5122"
+                    "http://localhost:5122" +
+                    "http://127.0.0.1:5501"
                 )
                 .AllowAnyHeader()
                 .AllowAnyMethod();
         });
 });
-
-
 
 builder.Services.AddScoped<ITrainingWeekService, TrainingWeekService>();
 builder.Services.AddScoped<ITrainingDayService, TrainingDayService>();

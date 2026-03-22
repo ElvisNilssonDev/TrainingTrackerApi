@@ -1,5 +1,5 @@
-# TrainingTrackerApi
-A training app for my own goal of becoming a bodybuilder for asthetic purposes. All apps for training is pay to use so I wil lcreate my own!<br/>
+# BodyCore
+A training app for my own goal of becoming a bodybuilder for asthetic purposes. All apps for training is pay to use so I will create my own!<br/>
 * The app will contain a way for Nutrition entries to be added for steady calorie count.
 * The app will give you the resources to logg your weeks, days and specific lifts.
 
@@ -155,6 +155,16 @@ if you havent already downloaded the LiveServer in visualstudio code do so and t
 and if everything is done correctly it should work and open the app.
 
 
-<br/> Current progress in the BodyCore frontend:
-![Concept:](https://github.com/ElvisNilssonDev/TrainingTrackerApi/blob/3455b83d480574440885e372bc4d402e31fa5334/Images/image_2026-03-18_173546277.png)<br/>
+# BodyCore features:
+![Front:](https://github.com/ElvisNilssonDev/BodyCoreApi/blob/631910cb421735ccfef6ec16c08ff4d47651af24/Images/BodyCoreFront.png)<br/>
+# Add Lift
+![AddLift:](https://github.com/ElvisNilssonDev/BodyCoreApi/blob/631910cb421735ccfef6ec16c08ff4d47651af24/Images/BodyCoreAddLift.png)
+# Add Nutrition
+![AddNutrition:](https://github.com/ElvisNilssonDev/BodyCoreApi/blob/631910cb421735ccfef6ec16c08ff4d47651af24/Images/BodyCoreNutritionAdd.png)<br/>
+# Management buttons
+![Manage:](https://github.com/ElvisNilssonDev/BodyCoreApi/blob/631910cb421735ccfef6ec16c08ff4d47651af24/Images/BodyCoreManage.png)<br/>
+# Update a entry
+![Update:](https://github.com/ElvisNilssonDev/BodyCoreApi/blob/631910cb421735ccfef6ec16c08ff4d47651af24/Images/BodyCoreUpdate.png)<br/>
+# Delete an Entry
+![Delete:](https://github.com/ElvisNilssonDev/BodyCoreApi/blob/631910cb421735ccfef6ec16c08ff4d47651af24/Images/BodyCoreDelete.png)<br/>
 

@@ -84,6 +84,76 @@ Server name: .\SQLEXPRESS
 Authentication: Windows Authentication
 
 If that connects, SQL Server Express is working.
+# Installation part 3
+In VisualStudio In your program.cs you see CORS<br/>
+make sure your localhost match with what you have, if you use live studio you can copy that adress to fool proof the CORS.<br/>
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend",
+        policy =>
+        {
+            policy
+                .WithOrigins(
+                    "https://localhost:7239",
+                    "http://localhost:5122",
+                    "http://127.0.0.1:5501",
+                    "http://127.0.0.1:5501/index.html"
+                )
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
+<br/>
+
+Now clone and open the frontend named BodyCore https://github.com/ElvisNilssonDev/BodyCore in VSCODE make sure your<br/>
+
+const API_BASE = "https://localhost:7239/api";
+
+in script.js match your own localhost.<br/>
+# Installation part 4
+Create the database from the API
+
+Your API has:
+
+AppDbContext
+DbSet<TrainingWeek>
+DbSet<TrainingDay>
+DbSet<LiftEntry>
+DbSet<NutritionEntry>
+
+So now you need the database schema created.
+
+Option A: Use existing migrations
+
+If your repo already has valid migrations, run this in the TrainingTrackerApi PackageManager:
+
+Update-Database <br/>
+
+Option B: If migrations are missing or outdated
+
+Run:
+
+Add-Migration InitialCreate
+Update-Database
+<br/>
+
+If dotnet ef is not installed globally run in powershell:
+
+dotnet tool install --global dotnet-ef
+After that
+
+Refresh SSMS.
+You should see a database called:
+
+TrainingTrackerDb
+
+and tables for your training/nutrition data.
+# Run the app
+Now with everything installed you should be able to run the API with the database connected.
+if you havent already downloaded the LiveServer in visualstudio code do so and then click on index.html, then click in the right corner on the LiveServer icon [ ((o))Go Live ]
+and if everything is done correctly it should work and open the app.
+
 
 <br/> Current progress in the BodyCore frontend:
 ![Concept:](https://github.com/ElvisNilssonDev/TrainingTrackerApi/blob/3455b83d480574440885e372bc4d402e31fa5334/Images/image_2026-03-18_173546277.png)<br/>
